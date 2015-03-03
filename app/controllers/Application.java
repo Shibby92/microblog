@@ -13,13 +13,8 @@ public class Application extends Controller {
 		public String password;
 
 		public String validate() {
-			User u = User.find(email);
-			if (u == null) {
+			if (User.authenticate(email, password) == null) {
 				return "Netacan email ili password";
-			}
-			if (HashHelper.checkPassword(password, u.password) == false) {
-				return "Netacan email ili password";
-
 			}
 			return null;
 		}
@@ -37,19 +32,15 @@ public class Application extends Controller {
 		if (submit.hasGlobalErrors()) {
 			return ok(index.render(submit));
 		}
-		String email = submit.get().email;
-		String password = submit.get().password;
-		User u = User.find(email);
+		Login l = submit.get();
+		User u = User.authenticate(l.email, l.password);
 		if (u == null) {
 			return ok(index.render(submit));
-		}
-		if (HashHelper.checkPassword(password, u.password)) {
-			session("user_id", Long.toString(u.id));
-			redirect("/user/" + u.id);
 		} else {
-			return ok(index.render(submit));
+			session().clear();
+			session("user_id", Long.toString(u.id));
+			return redirect("/user/" + u.id);
 		}
-		return TODO;
 	}
 
 }

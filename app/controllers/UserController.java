@@ -23,7 +23,7 @@ public class UserController extends Controller {
 	public static Result newUser(){
 		return ok(signup.render(userForm));
 	}
-	
+	@Security.Authenticated(Session.class)
 	public static Result show(long id){
 	User u = User.find(id);
 	return ok(showUser.render(u));

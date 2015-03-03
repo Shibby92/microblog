@@ -1,8 +1,12 @@
 @(loginForm: Form[Application.Login])
-
 @import helper._
 @main("Welcome to Play") {
 	<div class="container">
+	
+	@if(Session.getCurrentUser(ctx()) != null){
+		<h2>Welcome @Session.getCurrentUser(ctx()).email</h2>
+		<a href='/logout' class='btn btn-danger'> Logout</a>
+	} else {	
 	@helper.form(routes.Application.signIn()){
 		@if(loginForm.hasGlobalErrors()){
 			<div class="danger">
@@ -12,6 +16,7 @@
 		@helper.inputText( loginForm("email"))
 		@helper.inputPassword(loginForm("password"))
 		<input type="Submit" value="Login" class="btn btn-info" />
+	}
 	}
 </div>
     
