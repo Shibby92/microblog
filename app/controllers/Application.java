@@ -42,5 +42,9 @@ public class Application extends Controller {
 			return redirect("/user/" + u.id);
 		}
 	}
+	public static Result signOut(){
+		session().clear();
+		return redirect("/");
+	}
 
 }
