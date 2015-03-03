@@ -9,6 +9,8 @@ GET		/signup						controllers.UserController.newUser()
 GET 	/user/:id					controllers.UserController.show(id: Long)
 POST 	/signin						controllers.Application.signIn()
 GET 	/signout					controllers.Application.signOut()
+POST 	/create						controllers.PostController.create()
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET     /webjars/*file 				controllers.WebJarAssets.at(file)

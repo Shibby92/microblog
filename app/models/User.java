@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 import helpers.*;
@@ -9,7 +11,8 @@ import play.db.ebean.Model;
 
 @Entity
 public class User extends Model {
-
+	@OneToMany(mappedBy = "author")
+	public List<Post> posts;
 	@Id
 	public long id;
 
@@ -57,6 +60,5 @@ public class User extends Model {
 		}
 		return null;
 	}
-	
 
 }
