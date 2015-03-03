@@ -1,0 +1,19 @@
+@(loginForm: Form[Application.Login])
+
+@import helper._
+@main("Welcome to Play") {
+	<div class="container">
+	@helper.form(routes.Application.signIn()){
+		@if(loginForm.hasGlobalErrors()){
+			<div class="danger">
+			<p> @loginForm.globalError.message </p>
+			</div>
+		}
+		@helper.inputText( loginForm("email"))
+		@helper.inputPassword(loginForm("password"))
+		<input type="Submit" value="Login" class="btn btn-info" />
+	}
+</div>
+    
+
+}
